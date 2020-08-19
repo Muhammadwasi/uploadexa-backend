@@ -1,0 +1,14 @@
+aws:
+  access_key: AKIAZRHYKVTSOAGACP3C
+  secret_access_key: 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
+  s3:
+    bucket: upxa
+    region: ap-south-1
+server:
+  port: 8010
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: uploadexa
