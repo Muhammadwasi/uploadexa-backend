@@ -22,10 +22,12 @@ public class BucketService {
         this.amazonClient=amazonClient;
     }
 
+    private String getObjectId(String filename){
+        return  new Date().getTime()+"-"+filename.replace(" ","_");
+    }
     public BucketUploadFileResponse uploadFile(MultipartFile multipartFile) throws IOException {
         BucketUploadFileResponse bucketUploadFileResponse=new BucketUploadFileResponse();
-        String objectId = new Date().getTime()+"-"+multipartFile.getOriginalFilename().replace(" ","_");
-
+        String objectId = this.getObjectId(multipartFile.getOriginalFilename()) ;
         URL url =this.amazonClient.uploadFile(multipartFile,objectId);
         if (url!=null){
             File fileDomain = new File(objectId,multipartFile.getOriginalFilename(),url);
@@ -34,8 +36,20 @@ public class BucketService {
             System.out.println(fileDomain);
             System.out.println(bucketUploadFileResponse);
         }
+        return bucketUploadFileResponse;
+    }
 
-
+    public BucketUploadFileResponse uploadFileInParts(MultipartFile multipartFile) throws IOException {
+        BucketUploadFileResponse bucketUploadFileResponse=new BucketUploadFileResponse();
+        String objectId = this.getObjectId(multipartFile.getOriginalFilename()) ;
+        URL url =this.amazonClient.uploadFileInParts(multipartFile,objectId);
+        if (url!=null){
+            File fileDomain = new File(objectId,multipartFile.getOriginalFilename(),url);
+            iFileRepository.save(fileDomain);
+            bucketUploadFileResponse.setFile(fileDomain);
+            System.out.println(fileDomain);
+            System.out.println(bucketUploadFileResponse);
+        }
         return bucketUploadFileResponse;
     }
 }

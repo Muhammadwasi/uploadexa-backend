@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("v1/storage")
+@RequestMapping("/v1/storage")
 public class UserContentController {
     private UserContentService userContentService;
 
