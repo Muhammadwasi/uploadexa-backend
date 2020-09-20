@@ -1,6 +1,14 @@
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 
+#Eclipse files
+**/.project
+**/.classpath
+**/.settings/
+blog/bin/
+**/.tern-project
+
+
 ### Test ###
 src/test/
 
