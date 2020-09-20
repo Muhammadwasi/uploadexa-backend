@@ -1,0 +1,1 @@
+Uploadexa is a tool to quickly upload and share files over internet using generated link or QR Code.
