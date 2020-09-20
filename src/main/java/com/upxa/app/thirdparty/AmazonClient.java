@@ -2,10 +2,7 @@ package com.upxa.app.thirdparty;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
+import com.amazonaws.auth.*;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -44,6 +41,7 @@ public class AmazonClient {
     private void initializeAmazonClient(){
         this.amazonS3Client = AmazonS3ClientBuilder
                 .standard()
+                .withCredentials(new EnvironmentVariableCredentialsProvider())
                 .withRegion(this.region)
                 .build();
     }
